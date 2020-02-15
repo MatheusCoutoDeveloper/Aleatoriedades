@@ -1,0 +1,89 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+*{
+    margin:0 auto;
+    padding: 0;
+}
+
+img {
+    width: 150px;
+    height:150px;
+    border-radius: 15px;    
+ 
+}
+
+    
+span, h2 {
+     backface-visibility: hidden;
+}
+
+img:active {
+    
+    transition: width 200px 2s, height 2s ;
+    
+    
+}
+
+.tudo{width: 650px;
+    margin: 0 auto;
+    
+}
+.tudo tr td {
+    
+    border:none;
+    padding: 5px;
+    
+    border:0 auto;
+}
+
+.tudo table {
+    border: none;}
+
+footer {
+    position:absolute;bottom:0;padding: 10px;margin: 0 auto;}
+
+
+/* Aqui define a pesperquitiva */  
+.flip-container { perspective: 1000; }      
+
+/* aqui define o quanto será girado em graus a imagem */
+.flip-container:active .flipper, .flip-container.active .flipper {        
+  transform: rotateY(180deg);
+
+}    
+.flip-container, .front, .back {    
+width: 150px;
+height:150px;
+}
+
+/* aqui define a velocidade */
+.flipper {      
+  transition: 0.5s;     
+  transform-style: preserve-3d;     
+  position: relative;  
+}
+    
+/* esconde a imagem após girar */
+.front, .back {     
+  backface-visibility: hidden;      
+  position: absolute;   
+ 
+}
+    
+/* frente posicionada sobre o verso */
+.front { z-index: 2;  }    
+
+/* verso inicialmente escondido */
+.back { transform: rotateY(180deg); }
+
+.black:hover {
+    visibility: hidden !important;
+} 
+
+
+h2, span {
+    font-family: 'Pacifico', cursive;
+}
+
+img:hover{
+    box-shadow: 0 4px 8px 0 #000;
+}

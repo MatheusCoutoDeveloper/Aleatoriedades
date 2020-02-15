@@ -1,0 +1,107 @@
+body{
+            font-family: verdana;
+            font-size: 10pt;
+        }
+        
+        table.cal{
+            color: #dd3158; 
+            border-spacing: 0;
+            border: 3px solid #000;
+            border-radius: 0 0 25px 25px;
+        }
+        
+        .cal caption{
+            text-transform: uppercase;
+            background-color: #f48414;
+            color: #fff;
+            border-radius: 0 0 0 0;
+        }
+        
+        .cal th, .cal td{
+            margin: 2px;
+            padding-bottom: 2px;
+        }
+         
+        th{
+            text-align: center;
+            background-color: #FFF;
+        }
+        
+        .cal td{
+            width: 55px;
+            height: 55px;
+            text-align: center;
+            vertical-align: center;
+        }
+        
+        .feriado{
+            background-color: #eba6ac;
+        }
+        
+        tr:nth-child(even){
+            background-color: #c7e7f8;
+        }
+        
+        tr:nth-child(odd){
+            background-color: #95d4f7;
+        }
+        
+        tr:last-child>td:first-child{
+            border-radius: 0 0 0 25px;
+        }
+        
+        tr:last-child>td:last-child{
+            border-radius: 0 0 25px 0;
+        }
+        
+        tr>td:first-child, tr>td:last-child{
+            color: #900707;;
+        }
+        
+        tr:first-child>td:first-child{
+            color: #b9b8b8;
+        }
+        
+        tr:last-child>td:last-child{
+            color: #b9b8b8;
+        }
+        td:nth-child(even){
+            border-left: 1px solid #199578;
+            border-right: 1px solid #199578;
+        }
+        .gold{
+            background-color: #ced0d0;
+            color: #b9b8b8;
+        }
+        
+        span{
+            display: none;
+            text-align: center;
+            color #ed5050;
+            font-size: 7pt;
+        }
+        
+        
+        
+        td:hover>span{
+            display: block;
+        }
+
+img{
+    width: 410px;
+    height: 100px;
+}
+
+.bolo{
+    width: 50px;
+    height: 50px;
+}
+
+.ovo{
+    width: 50px;
+    height: 50px;
+    border-radius: 0 0 0 25px;    
+}
+.centro{
+    margin: 0 auto;
+}
