@@ -1,0 +1,35 @@
+  * {
+      font-family: cursive;
+  }
+  .borda {
+      width: 500px;
+      height: auto;
+      border: 2px #aaF solid;
+      padding: 10px;
+      margin: 10px;
+  }
+  .campos {
+      width: 100%
+  }
+  #pedido {
+      width: 500px;
+      height: auto;
+      margin: 10px;
+      padding: 10px;
+      font-size: 14pt;
+  }
+span{
+    color: red;
+}
+.azul{
+    border: blue solid 3px;
+    background-color: #ddf;
+}
+.vermelho{
+    border: red solid 3px;
+    background-color: #fee;
+}
+.verde{
+    border: green solid 3px;
+    background-color: #efe;
+}

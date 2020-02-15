@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercício</title>
+    <meta charset="UTF-8">
+    <link href="css/estilo.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/funcoes.js"></script>
+    <script>
+        $(function () {
+            $("#pedir").click(
+                function () {
+                    if (validaPedido()) {
+                        var saida = "",
+                            valor, extra;
+                        var precotam = parseInt($("input[name=tamanho]:checked").val());
+                        saida += "<p>Cliente: " + $("#nome").val() + "</p>";
+                        saida += "<p>Endereço: " + $("#endereco").val() + "</p>";
+                        saida += "<p>Telefone: " + $("#telefone").val() + "</p>";
+                        saida += "<p>Sabor: " + $("#sabores").val() + "</p>";
+                        if ($("#iextra").val() != "") {
+                            saida += "<p>Ingrediente Extra: " + $("#iextra").val() + "</p>";
+                            if ($("#iextra").val() == "Cebola" || $("#iextra").val() == "Tomate" || $("#iextra").val() == "Milho") {
+                                extra = 7.50;
+                            } else {
+                                extra = 11.50;
+                            }
+                            valor = precotam + extra;
+                        } else {
+                            valor = precotam;
+                        }
+                        saida += "<p>Valor a pagar: " + valor + "</p>";
+                        saida += "<p>Forma de Pagamento: " + $("#pag").val() + "</p>";
+                        $("#pedido").html(saida);
+                        if (valor < 30)
+                            $("#pedido").addClass("azul");
+                        else if (valor < 40)
+                            $("#pedido").addClass("vermelho");
+                        else
+                            $("#pedido").addClass("verde");
+                    }
+                }
+            )
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <h2 class="borda">Monte sua pizza</h2>
+
+    <form>
+        <fieldset class="borda">
+            <legend>
+                <h3>Dados do cliente</h3></legend>
+            <p>Nome:
+                <input class="campos" type="text" id="nome" />
+            </p>
+            <p>Telefone:
+                <input class="campos" type="text" id="telefone" />
+            </p>
+            <p>Endereço:
+                <input class="campos" type="text" id="endereco" />
+            </p>
+            <span id="tc"></span>
+        </fieldset>
+        <div id="pedido"></div>
+        <fieldset class="borda">
+            <legend>
+                <h3>Dados do pedido</h3></legend>
+            <h4>Tamanho:</h4>
+            <p>
+                <input type="radio" name="tamanho" id="tamanho1" value="20" /> Brotinho
+                <input type="radio" name="tamanho" id="tamanho2" value="25" /> Média
+                <input type="radio" name="tamanho" id="tamanho3" value="30" /> Grande <span id="tt"></span>
+            </p>
+            <h4>Sabores: </h4>
+            <select id="sabores">
+                <option value="">---Escolha um sabor---</option>
+                <option value="Mussarela">Mussarela</option>
+                <option value="Calabresa">Calabresa</option>
+                <option value="Atum">Atum</option>
+                <option value="Frango com Catupiry">Frango com Catupiry</option>
+                <option value="Alho e Óleo">Alho e Óleo</option>
+                <option value="Baiana">Baiana</option>
+                <option value="Brasileira">Brasileira</option>
+                <option value="Catupiry">Catupiry</option>
+                <option value="Havaiana">Havaiana</option>
+                <option value="Lombo Canadense">Lombo Canadense</option>
+                <option value="Maguerita">Maguerita</option>
+            </select> <span id="ts"></span>
+            <h4>Ingrediente Extra:</h4>
+            <input list="extra" id="iextra">
+            <datalist id="extra">
+                <option value="Cebola">
+                    <option value="Tomate">
+                        <option value="Milho">
+                            <option value="Catupiry">
+                                <option value="Bacon">
+
+            </datalist>
+        </fieldset>
+        <fieldset class="borda">
+            <legend>
+                <h4>Forma de pagamento:</h4></legend>
+            <select id="pag">
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Débido">Débito</option>
+                <option value="Crédito">Crédito</option>
+                <option value="Alimentação">Alimentação</option>
+            </select>
+            <p>
+                <input type="button" id="pedir" value="Fechar Pedido" />
+            </p>
+        </fieldset>
+    </form>
+</body>
+
+</html>
