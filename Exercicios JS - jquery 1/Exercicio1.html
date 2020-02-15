@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="js/jquery-ui.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <title>Exercício 1 - A1</title>
+    <style>
+        *{font-family: Tahoma}
+        #dados{
+            font-size: 14pt;
+        }
+    </style>
+    <script>
+        function validar() {
+            if ($("#data").val() == "" || $("#valor").val() == "" || $("#km").val() == "") {
+
+                $("#msg").dialog("open");
+                $("#msg").html("Digite todos os dados");
+
+                return false;
+            }
+            return true;
+        }
+
+        function limparCampos() {
+            $("#data").val(" ");
+            $("#valor").val(" ");
+            $("#km").val(" ");
+        }
+
+        function gravar() {
+            if (validar()) {
+                var i;
+
+                if (sessionStorage.length > 0) {
+                    i = parseInt(sessionStorage.getItem("qtde")) + 1;
+                } else {
+                    sessionStorage.setItem("qtde", 1);
+                    i = sessionStorage.getItem("qtde");
+                }
+                var data = $('#data').datepicker('getDate');
+                data=data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear();
+                sessionStorage.setItem("data" + i, data);
+                sessionStorage.setItem("valor" + i, $("#valor").val());
+                sessionStorage.setItem("km" + i, $("#km").val());
+                sessionStorage.setItem("tipo" + i, $("#tipo").val());
+                $("#msg").dialog("open");
+                $("#msg").html("Dados gravados com sucesso");
+
+                sessionStorage.setItem("qtde", i);
+                i++;
+                limparCampos();
+            }
+        }
+
+        function mostraKM() {            
+            saida="";
+            if (sessionStorage.length > 0) {
+                var q = sessionStorage.getItem("qtde");
+                for (i = 1; i <= q; i++) {                    
+                    if(parseFloat(sessionStorage.getItem("km" + i))>1000)
+                      saida += "<p>Data da Compra = " +sessionStorage.getItem("data" + i) +
+                        "<br>Valor da Compra: R$ " + parseFloat(sessionStorage.getItem("valor" + i)).toFixed(2) + 
+                        "<br>Tipo: " + sessionStorage.getItem("tipo"+i)+"</p>";
+                }
+                $("#dados").html("");
+                if(saida==""){
+                    $("#msg").dialog("open");
+                    $("#msg").html("Nenhum carro encontrado");    
+                }
+                else{
+                    $("#dados").append(saida);
+                }                
+            } else {
+                $("#msg").dialog("open");
+                $("#msg").html("WebStorage vazio");
+            }
+        }
+
+        function mostraPateo() {
+            if (sessionStorage.length > 0) {
+                var q = sessionStorage.getItem("qtde");
+                $("#dados").html("");
+                for (i = 1; i <= q; i++) {
+                    tipo=sessionStorage.getItem("tipo"+i);
+                    valor=parseFloat(sessionStorage.getItem("valor"+i))
+                    if(tipo=="Sedã"){
+                        valora = valor*1.15;
+                    }
+                    else{
+                        if(tipo=="Hatch"){
+                            valora = valor*1.10;
+                        }
+                        else{
+                            valora = valor*1.20;
+                        }
+                    }
+                    var data=sessionStorage.getItem("data" + i);             
+                    var km=sessionStorage.getItem("km" + i);  
+                    $("#dados").append("<p><strong>Data da Compra:</strong> " + data + 
+                    "<br><strong> km rodados: </strong>" + km +
+                    "<br><strong> Tipo: </strong>" + tipo + 
+                    "<br><strong> Valor de Venda: </strong>R$" + valora.toFixed(2));
+                }
+            } else {
+                $("#msg").dialog("open");
+                $("#msg").html("Nenhum carro cadastrado");
+            }
+        }
+
+        $(function() {
+            $("#salvar").click(gravar);
+            $("#kms").click(mostraKM);
+            $("#pateo").click(mostraPateo);
+
+            $("#msg").dialog({
+                autoOpen: false,
+                width: 300,
+                buttons: {
+                    "Fechar": function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
+            $("#data").datepicker({
+                dateFormat: 'dd/mm/yy',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],                
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <form id="form1" name="form1" method="post" action="">
+        <p>Data da Compra:
+            <input type="text" id="data">
+        </p>
+        <p>Valor da Compra:
+            <input type="text" id="valor">
+        </p>
+        <p>Km rodados:
+            <input type="text" id="km">
+        </p>
+        <p>Tipo: <select id="tipo">                       
+            <option value="Sedã">Sedã</option>            
+            <option value="Hatch">Hatch</option> 
+            <option value="SUV">Utilitário esportivo</option>           
+        </select></p>
+        <input type="button" id="salvar" value="Salvar">
+        <input type="button" id="kms" value="km > 1000">
+        <input type="button" id="pateo" value="Pateo">
+    </form>
+    <div id="msg" title="Informações">
+
+    </div>
+    <article id="dados"></article>
+</body>
+
+</html>

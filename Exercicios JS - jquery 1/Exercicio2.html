@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercício 2</title>
+    <meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/lista.js"></script>
+    <script>
+        function buscaJogadores(tipo){
+            x = jogadores.length;
+            var total=0;
+            var qtotal=0;
+            saida="";
+            for (i = 0; i < x; i++) {                                
+                if (jogadores[i].profissional==tipo) {  
+                    qtotal++;
+                    saida+="<strong><br>Nome: </strong>" + jogadores[i].nome +
+                        "<br><strong>Idade: </strong> " + jogadores[i].idade + 
+                        "<br><strong>Clubes: </strong><br>";  
+                    total+=parseInt(jogadores[i].idade);
+                    for(j=0;j<jogadores[i].clube.length; j++){
+                        saida+="<strong>Nome: </strong>" + jogadores[i].clube[j].nome + " - " +
+                        "<strong>Salário: </strong>R$ " + jogadores[i].clube[j].salario+"<br>";                         
+                    }
+                   
+                }            
+            }
+            $("#dados").html("");
+            $("#dados").append("<h3>Média das idades: " + (total/qtotal).toFixed(2) +"</h3>");
+            $("#dados").append(saida);
+        }
+        $(function() {
+            $("#btnS").click(function(){
+               buscaJogadores(true);
+            });
+            $("#btnN").click(function(){
+               buscaJogadores(false);
+            });
+            
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Lista de Jogadores: </h2>
+    <input type="button" value="Profissionais" id="btnS">
+    <input type="button" value="Amadores" id="btnN">
+    <div id="dados"></div>
+</body>
+
+</html>

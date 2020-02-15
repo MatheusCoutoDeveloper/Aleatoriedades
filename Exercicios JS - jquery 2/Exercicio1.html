@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="js/jquery-ui.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <title>Exercício 1 - A1</title>
+    <style>
+        *{font-family: Tahoma}
+        #dados{
+            font-size: 14pt;
+        }
+    </style>
+    <script>
+        function validar() {
+            if ($("#data").val() == "" || $("#valor").val() == "" || $("#qtdep").val() == "") {
+
+                $("#msg").dialog("open");
+                $("#msg").html("Digite todos os dados");
+
+                return false;
+            }
+            return true;
+        }
+
+        function limparCampos() {
+            $("#data").val(" ");
+            $("#valor").val(" ");
+            $("#qtdep").val(" ");
+        }
+
+        function gravar() {
+            if (validar()) {
+                var i;
+
+                if (sessionStorage.length > 0) {
+                    i = parseInt(sessionStorage.getItem("qtde")) + 1;
+                } else {
+                    sessionStorage.setItem("qtde", 1);
+                    i = sessionStorage.getItem("qtde");
+                }
+                var data = $('#data').datepicker('getDate');
+                data=data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear();
+                sessionStorage.setItem("data" + i, data);
+                sessionStorage.setItem("valor" + i, $("#valor").val());
+                sessionStorage.setItem("qtdep" + i, $("#qtdep").val());
+                var tipo = $("input[name=tipop]:checked").val();
+                sessionStorage.setItem("tipo" + i, tipo);
+                $("#msg").dialog("open");
+                $("#msg").html("Dados gravados com sucesso");
+
+                sessionStorage.setItem("qtde", i);
+                i++;
+                limparCampos();
+            }
+        }
+
+        function mostraProd() {            
+            saida="";
+            if (sessionStorage.length > 0) {
+                var q = sessionStorage.getItem("qtde");
+                for (i = 1; i <= q; i++) {                    
+                    if(parseFloat(sessionStorage.getItem("qtdep" + i))<=10)
+                      saida += "<p><strong>Quantidade:</strong> "+sessionStorage.getItem("qtdep"+i)+
+                          " - <strong>Valor Unitário: </strong>R$ " + parseFloat(sessionStorage.getItem("valor" + i)).toFixed(2) +
+                        " - <strong>Tipo: </strong>" + sessionStorage.getItem("tipo"+i)+
+                          " - <strong>Data: </strong>" +sessionStorage.getItem("data" + i) +"</p>";
+                }
+                $("#dados").html("");
+                if(saida==""){
+                    $("#msg").dialog("open");
+                    $("#msg").html("Nenhum produto encontrado");    
+                }
+                else{
+                    $("#dados").append(saida);
+                }                
+            } else {
+                $("#msg").dialog("open");
+                $("#msg").html("WebStorage vazio");
+            }
+        }
+
+        function mostraEstoque() {
+            if (sessionStorage.length > 0) {
+                var q = sessionStorage.getItem("qtde");
+                $("#dados").html("");
+                for (i = 1; i <= q; i++) {
+                    tipo=sessionStorage.getItem("tipo"+i);
+                    valor=parseFloat(sessionStorage.getItem("valor"+i))
+                    var qtdep=parseFloat(sessionStorage.getItem("qtdep" + i));
+                    valor = valor*qtdep;
+                    if(tipo=="Limpeza"){
+                        valora = valor*1.15;
+                    }
+                    else{
+                        if(tipo=="Alimento"){
+                            valora = valor*1.20;
+                        }
+                        else{
+                            valora = valor*1.10;
+                        }
+                    }
+                    var data=sessionStorage.getItem("data" + i);             
+                      
+                    $("#dados").append("<p><strong>Quantidade: </strong>" +qtdep +
+                    "<br><strong> Tipo: </strong>" + tipo +
+                    "<br><strong> Data:</strong> " + data +                      
+                    "<br><strong> Valor em Estoque: </strong>R$ " + valora.toFixed(2));
+                }
+            } else {
+                $("#msg").dialog("open");
+                $("#msg").html("WebStorage vazio");
+            }
+        
+        }
+
+        $(function() {
+            $("#salvar").click(gravar);
+            $("#qtdeps").click(mostraProd);
+            $("#estoque").click(mostraEstoque);
+
+            $("#msg").dialog({
+                autoOpen: false,
+                width: 300,
+                buttons: {
+                    "Fechar": function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
+            $("#data").datepicker({
+                dateFormat: 'dd/mm/yy',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],                
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <form id="form1" name="form1" method="post" action="">        
+        <p>Valor Unitário:
+            <input type="text" id="valor">
+        </p>
+        <p>Quantidade:
+            <input type="text" id="qtdep">
+        </p>
+        <p>Data:
+            <input type="text" id="data">
+        </p>
+        <p>Tipo: 
+            <input type="radio" name="tipop" value="Alimento">Alimento
+            <input type="radio" name="tipop" value="Higiene">Higiene 
+            <input type="radio" name="tipop" value="Limpeza">Limpeza           
+        </p>
+        <input type="button" id="salvar" value="Salvar">
+        <input type="button" id="estoque" value="Estoque">
+        <input type="button" id="qtdeps" value="Estoque <= 10">
+        
+    </form>
+    <div id="msg" title="Informações">
+
+    </div>
+    <article id="dados"></article>
+</body>
+
+</html>

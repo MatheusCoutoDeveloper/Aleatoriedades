@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercício 2</title>
+    <meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vendas.js"></script>
+    <script>
+        function buscaClientes(tipo){
+            x = clientes.length;
+            var total=0;
+            saida="";
+            for (i = 0; i < x; i++) {                                
+                if (clientes[i].sexo==tipo) {                    
+                    saida+="<strong><br>Nome: </strong>" + clientes[i].nome +
+                        "<br><strong>E-mail: </strong> " + clientes[i].email + 
+                        "<br><strong>Compras: </strong><br>";  
+                    for(j=0;j<clientes[i].compras.length; j++){
+                        saida+="<strong>Data: </strong>" + clientes[i].compras[j].data + " - " +
+                        "<strong>Valor: </strong>R$ " + clientes[i].compras[j].valor+"<br>"; 
+                        total+=parseFloat(clientes[i].compras[j].valor);
+                    }
+                   
+                }            
+            }
+            $("#dados").html("");
+            $("#dados").append("<h3>Total vendido: R$ " + total.toFixed(2) +"</h3>");
+            $("#dados").append(saida);
+        }
+        $(function() {
+            $("#btnF").click(function(){
+               buscaClientes("F");
+            });
+            $("#btnM").click(function(){
+               buscaClientes("M");
+            });
+            
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Clientes: </h2>
+    <input type="button" value="Mulheres" id="btnF">
+    <input type="button" value="Homens" id="btnM">
+    <div id="dados"></div>
+</body>
+
+</html>
