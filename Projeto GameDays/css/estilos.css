@@ -1,0 +1,292 @@
+/*
+GERAL
+*/
+
+body {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    color: #4d4d4d;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    
+}
+
+.botao {
+    color: #f1f1f1;
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: #bf2727;
+    font-size: .9em;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+
+
+
+/*
+NAVEGAÇÃO
+*/
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #4d4d4d;
+}
+
+nav > a {
+    text-decoration: none;
+    color: #f1f1f1;
+    font-weight: 700;
+    font-size: 28px;
+    font-family: Pacifico, serif;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+nav ul li {
+    text-align: center;
+    width: 100%;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 10px 0;
+    width: 100%;
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
+
+/*
+CABEÇALHO
+*/
+
+header {
+    background-image: url('../img/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: rgb(21, 20, 20);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    text-shadow: #f5f5f5 1px -1px
+    
+}
+
+header h2 {
+    margin-bottom: 2em;
+    color: #c72222;
+    font-size: 30px;
+    text-shadow: #000 1px -1px
+}
+
+
+/*
+SOBRE
+*/
+
+#sobre {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px 20px;
+    background-color: #bf2727;
+    color: #f1f1f1;
+    
+}
+
+#sobre p {
+    margin-bottom: 2.5em;
+    max-width: 1000px;
+}
+
+#sobre .botao {
+    background-color: #f1f1f1;
+    color: #4d4d4d;
+}
+
+
+/*
+PROGRAMAÇÃO
+*/
+
+#programacao {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#programacao div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+/*
+FOTOS
+*/
+
+#fotos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+#fotos h2 {
+    margin-bottom: 20px;
+}
+
+#fotos img {
+    width: 100%;
+}
+
+
+/*
+COMITÊ
+*/
+
+#comite h2 {
+    text-align: center;
+    background-color: #bf2727;
+    color: #fff;
+    margin-top: 2px;
+}
+
+#comite p {
+    margin: 10px;
+    text-align: center;
+}
+#comite p span{
+    background-color: #bf2727;
+    padding: 2px;
+    color: #fff;
+}
+
+
+/*
+FOOTER
+*/
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #4d4d4d;
+    color: #f1f1f1;
+    margin-top: 10px;
+}
+
+
+/*
+MEDIA QUERIES
+*/
+
+@media screen and (min-width: 768px) {
+    /*
+    NAVEGAÇÃO
+    */
+    nav {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    nav ul {
+        flex-direction: row;
+        width: 70%;
+    }
+    /*
+    CABEÇALHO
+    */
+    header {
+        height: 600px;
+        height: 60vh;
+        justify-content: center;
+    }
+    header h1{
+        color: #000;
+        font-size: 19px;
+        font-style: oblique;
+    }
+    header h2{
+        color: #bf2727;
+    }
+    .botao {
+    background-color: white;
+        color: #4d4d4d;
+    }
+    
+}
+    /*
+    SOBRE
+    */
+    #sobre {
+        height: 250px;
+        height: 30vh;
+        justify-content: center;
+        min-height: 250px;
+        padding-top: 20px;
+    }
+    /*
+    PROGRAMAÇÃO
+    */
+    #programacao {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #programacao h2 {
+        text-align: center;
+        width: 100%;
+        margin-left: 10px;
+    }
+    #programacao div {
+        flex-grow: 1;
+        flex-basis: 150px;
+        padding: 0 10px;
+    }
+    /*
+    FOTOS
+    */
+    #fotos {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    #fotos h2 {
+        width: 100%;
+        text-align: center;
+    }
+    #fotos img {
+        width: 33.3333333333%;
+    }
+    #footer {
+        margin-top: 10px
+    }
+    /*
+    COMITE
+    */
+}
