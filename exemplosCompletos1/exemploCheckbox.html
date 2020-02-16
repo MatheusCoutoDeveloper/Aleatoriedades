@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="js/jquery-ui.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script>
+        function validaDados(){      
+	       var i;
+	       for (i=1;i<=4;i++){
+               if ($("#op"+i).is(":checked")){
+                   break;
+               }
+               if (i==4)
+               {
+                $("#dialog1").dialog("open");
+			    return false;
+		      }
+	       }
+            return true;
+        }
+        function mostraSelecionados(){
+            var todos, texto="";
+            if(validaDados()){
+                todos = $("input[name=lista]:checked");
+                todos.each(function(){
+                    texto+=$(this).val()+"<br>";
+                });                
+                $("#selecionados").html(texto);
+            }
+        }
+        
+        $(function(){
+            $("#botao1").click(mostraSelecionados);            
+            
+            $("#dialog1").dialog({
+                autoOpen: false,
+                width: 300,
+                buttons: {
+                    "Fechar": function() {
+                        $(this).dialog("close");                       
+                    }
+                }
+            });
+        })
+    
+    </script>
+</head>
+<body>
+<form name="form1" method="post" action="">  
+   <h3>Escolha os assuntos preferidos: </h3>
+    <input type="checkbox" name="lista" value="Esporte" id="op1" />Esporte <br />
+    <input type="checkbox" name="lista" value="Política" id="op2" />Política <br />
+    <input type="checkbox" name="lista" value="Computação" id="op3" />Computação <br />
+    <input type="checkbox" name="lista" value="Economia" id="op4" />Economia<br />
+    <input type="button" id="botao1" value="Mostra Selecionados">    
+</form>
+<h3>Assuntos Escolhidos</h3>
+<div id="selecionados"></div>
+<div id="dialog1" title="Erro">
+        <br>Escolha um item.
+    </div>
+</body>
+</html>

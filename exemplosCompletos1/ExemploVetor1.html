@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exemplo Vetor</title>
+    <link rel="stylesheet" href="js/jquery-ui.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <meta charset="UTF-8">
+    <style>
+        #conteudo {
+            font-size: 14pt;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        var nros = new Array();
+        var i = 0;
+
+        function lerVetor() {
+            if ($("#valor").val() != "") {
+                nros[i] = $("#valor").val();
+                $("#dialog1").dialog("open");
+                $("#valor").val("");                
+                i++;
+            } else {
+                $("#dialog2").dialog("open");                
+            }
+        }
+
+        function mostraVetor() {
+            var i;
+            for (i = 0; i < nros.length; i++) {
+                $("#conteudo").append(
+                    "<b>Indice:</b> " + i +
+                    "<b> - Conteúdo: </b> " + nros[i] + "<br />");
+            }
+        }
+        $(function() {
+            $("#botao1").click(lerVetor);
+            $("#botao2").click(mostraVetor);
+
+            $("#dialog1, #dialog2").dialog({
+                autoOpen: false,
+                width: 300,
+                buttons: {
+                    "Fechar": function() {
+                        $(this).dialog("close");
+                        $("#valor").focus();
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form name="form1" action="">
+        Valor:
+        <input type="text" id="valor">
+        <br>
+        <br>
+        <input type="button" value="Armazenar valor" id="botao1">
+        <input type="button" value="Mostra valores" id="botao2">
+
+    </form>
+    <div id="conteudo"></div>
+    <div id="dialog1" title="Sucesso">
+        <br>Valor armazenado com sucesso!!!
+    </div>
+    <div id="dialog2" title="Erro">
+        <br>Campo vazio
+    </div>
+</body>
+
+</html>

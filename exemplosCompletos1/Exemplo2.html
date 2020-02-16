@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Exemplo 2 - Tabuada</title>
+
+    <link rel="stylesheet" href="js/jquery-ui.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script>
+        function tabuada(num) {
+            var num = parseInt($("#umnumero").val());
+            var cont,texto="";
+            for (cont = 1; cont <= 10 ; cont++){
+                texto+=num+"*"+cont+"="+(num*cont)+"<br />";
+            }
+            $("#aresposta").html("<br>Tabuada: <br>"+texto);            
+        }
+        $(function() {
+            $("#botao2").click(function() {
+                $("#dialog2").dialog("open");
+            });
+
+            $("#dialog2").dialog({
+                autoOpen: false, 
+                buttons: [{
+                    text: "Calcular",
+                    click: function() {
+                        tabuada();
+                    }
+                }]
+            });
+        });
+
+        
+    </script>
+</head>
+
+<body>
+
+    
+    <br>
+    <button id="botao2">Dialog com input</button>
+    
+    <div id="dialog2" title="Tabuada">
+
+        <br>Digite um número:
+        <input type="text" id="umnumero" />
+        <br>
+        <div id="aresposta"></div>
+    </div>
+
+
+</body>
+
+</html>
